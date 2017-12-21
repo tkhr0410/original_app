@@ -1,4 +1,5 @@
 OriginalApp::Application.routes.draw do
+  devise_for :users
   root  'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/map',     to: 'static_pages#map',     via: 'get'

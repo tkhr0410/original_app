@@ -8,7 +8,11 @@ gem 'devise', '3.4.1'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'will_paginate-bootstrap', '1.0.1'
-
+gem "font-awesome-rails"
+gem 'carrierwave'
+gem 'omniauth', '~> 1.2.1'
+gem 'omniauth-twitter', '~> 1.0.1'
+gem 'fog'
 
 group :development do
   gem 'sqlite3', '1.3.9'

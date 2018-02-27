@@ -4,8 +4,8 @@
     <section>
       <%= gravatar_for @user %>
       <h1><%= @user.name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
-      <span><b>Microposts:</b> <%= @user.microposts.count %></span>
+      <span><%= link_to "マイプロフィール", @user %></span>
+      <span><b>投稿:</b> <%= @user.microposts.count %></span>
     </section>
     <section>
       <%= render 'shared/stats' %>
@@ -21,10 +21,34 @@
   <div class="col-md-8">
     <h3><%= @title %></h3>
     <% if @users.any? %>
-      <ul class="users">
-        <%= render @users %>
-      </ul>
-      <%= will_paginate %>
+      <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>イメージ</th>
+                      <th>氏名</th>
+                      <th>メール</th>
+                      <th>リンク</th>
+                  </tr>
+              </thead>
+              <% @users.each do |user| %>
+              <tbody>
+                  <tr>
+                      <td><%= user.id %></td>
+                      <td><%= link_to gravatar_for user, size: 52 %></td>
+                      <td><%= link_to user.name, user %></td>
+                      <td><%= mail_to user.email %></td>
+                      <td>
+                          <%= link_to sanitize('<i class="fa fa-user"></i>'), user, class: "btn btn-info" %>
+                          <%= link_to sanitize('<i class="fa fa-trash-o"></i>'), "#", class: "btn btn-danger" %>
+                          <%= link_to sanitize('<i class="fa fa-map-pin"></i>'), "/map", class: "btn btn-success" %>
+                      </td>
+                  </tr>
+              </tbody>
+              <% end %>
+          </table>
+      </div>
     <% end %>
   </div>
 </div>

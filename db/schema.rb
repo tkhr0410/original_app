@@ -11,13 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208032321) do
+ActiveRecord::Schema.define(version: 20180222093551) do
+
+  create_table "contacts", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "age"
+  end
 
   create_table "microposts", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image"
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
@@ -48,6 +58,8 @@ ActiveRecord::Schema.define(version: 20180208032321) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "admin",                  default: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

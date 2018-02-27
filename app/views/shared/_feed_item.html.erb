@@ -7,6 +7,11 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
   </span>
+  <% if feed_item.image? %>
+    <div class="image">
+      <%= image_tag feed_item.image.url %>
+    </div>
+  <% end %>
   <% if current_user == feed_item.user %>
     <%= link_to "delete", feed_item, method: :delete,
                                      data: { confirm: "You sure?" },

@@ -18,11 +18,28 @@
       </div>
     </div>
     <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= will_paginate @microposts, renderer: BootstrapPagination::Rails %>
+      <h3>投稿一覧 (<%= @user.microposts.count %>)</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+              <tr>
+                <th>氏名</th>
+                <th>投稿内容</th>
+                <th>投稿時間</th>
+                <th>リンク</th>
+              </tr>
+              <% @microposts.each do |micropost| %>
+              <tr>
+                <td><%= link_to micropost.user.name, micropost.user %></td>
+                <td><%= micropost.content %></td>
+                <td>投稿<%= time_ago_in_words(micropost.created_at) %>前</td>
+                <td>
+                  <%= link_to sanitize('<i class="fa fa-trash-o"></i>'), "#", class: "btn btn-danger" %>
+                </td>
+              </tr>
+              <% end %>
+            </table>
+          </div>
+      <%= will_paginate @microposts, renderer: BootstrapPagination::Rails, previous_label: '前', next_label: '次' %>
     <% end %>
   </div>
 </div>
